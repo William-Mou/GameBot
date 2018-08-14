@@ -48,11 +48,11 @@ def on_chat(msg):
 
         elif command[0] == "getfate":
             bot.sendMessage(header[2], cons.find_cons(constellation_dict[user_id][1]))
-        elif command[0] == "startgame":
+        elif command[0] == "newgame":
             if chat_id in game_dict:
                 bot.sendMessage(header[2], "此聊天室已開始遊戲")
             else:
-                game_dict[chat_id] = game.game()
+                game_dict[chat_id] = game.game(chat_id)
         elif command[0] == "closegame":
             if chat_id in game_dict:
                 del game_dict[chat_id]
@@ -61,6 +61,7 @@ def on_chat(msg):
                 bot.sendMessage(header[2], "此聊天室未開始遊戲")
         elif command[0] == 'help':
             bot.sendMessage(chat_id, (
+                '/newgame - 創建遊戲\n'
                 '/startgame - 開始遊戲\n'
                 '/closegame - 結束遊戲\n'
                 '/joingame - 加入遊戲\n'
